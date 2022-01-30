@@ -1,0 +1,1 @@
+web: gunicorn cvlcajueiro.wsgi --log-file -

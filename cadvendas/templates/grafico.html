@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block grafico %}
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Nome", "Qtd", { role: "style" } ],
+        {% for tipo in tipos %}
+            ['{{ tipo.nome }}', {{ tipo.qtd }}, "{{ tipo.cor }}"  ],
+        {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Quantidade de Vendas Por Corretor",
+        width: 800,
+        height: 500,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("corpo2"));
+      chart.draw(view, options);
+  }
+  </script>
+
+
+{% endblock grafico %}
+
+
+{% block grafico3 %}
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Nome", "Qtd", { role: "style" } ],
+        {% for tipo in tipos2 %}
+            ['{{ tipo.nome }}', {{ tipo.qtd }}, "{{ tipo.cor }}"  ],
+        {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Quantidade de Vendas Por Cliente",
+        width: 800,
+        height: 500,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("corpo3"));
+      chart.draw(view, options);
+  }
+  </script>
+
+
+{% endblock grafico3 %}
+
+
+
+
+{% block conteudo %}
+    <div class="container">
+        <div id="corpo2" class="container"></div>
+        <div id="corpo3" class="container"></div>
+    </div>
+
+
+
+{% endblock conteudo %}

@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block conteudo %}
+
+
+                    <div class="container-fluid">
+
+                        <div class="row">
+
+                            <div class="col-xl-1 col-md-6 mb-4">
+                                <div class="dropdown">
+                                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Rosa
+                                  </button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <!--                            <a class="dropdown-item" href="{% url 'busca_cor' 'Rosa' %}" style="color:hotpink; background-color:powderblue; ">  Rosa</a> -->
+                                    <a class="dropdown-item" href="{% url 'busca_cor' 'RosaV' %}" >  Vendido</a>
+                                    <a class="dropdown-item" href="{% url 'busca_cor' 'RosaN' %}" >  Não Vendido</a>
+                                    <a class="dropdown-item" href="{% url 'busca_cor' 'RosaT' %}" >  Todos</a>
+        <!--                            <a class="dropdown-item" href="{% url 'lotes_marcados' %}"> Todos</a> -->
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-1 col-md-6 mb-4">
+                                <div class="dropdown">
+                                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonV" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     Verde
+                                  </button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <!--                            <a class="dropdown-item" href="{% url 'busca_cor' 'Rosa' %}" style="color:hotpink; background-color:powderblue; ">  Rosa</a> -->
+                                    <a class="dropdown-item" href="{% url 'busca_cor' 'VerdeV' %}" >  Vendido</a>
+                                    <a class="dropdown-item" href="{% url 'busca_cor' 'VerdeN' %}" >  Não Vendidos</a>
+                                    <a class="dropdown-item" href="{% url 'busca_cor' 'VerdeT' %}" >  Todos</a>
+    <!--                            <a class="dropdown-item" href="{% url 'lotes_marcados' %}"> Todos</a> -->
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <nav aria-label="Page navigation example">
+                          <ul class="pagination">
+                            {% for pagina in vendas.paginator.page_range %}
+
+                              {% if vendas.number == pagina %}
+                                <li class="page-item active">
+                                  <a class="page-link" href="?p={{ pagina }}&termo={{ request.GET.termo }}">{{pagina}}</a>
+                                </li>
+                              {% else %}
+                                <li class="page-item">
+                                  <a class="page-link" href="?p={{ pagina }}&termo={{ request.GET.termo }}">{{pagina}}</a>
+                                </li>
+                              {% endif  %}
+
+                            {% endfor %}
+                          </ul>
+                        </nav>
+
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3 d-sm-flex align-items-center justify-content-between mb-4">
+                                <h6 class="m-0 font-weight-bold text-primary">Lotes {{ cor_tit }}  - Quant.: {{ quant }} </h6>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+<!--                                    <table class="table table-bordered"> -->
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <th>Seq</th>
+                                            <th>Quadra</th>
+                                            <th>Lote</th>
+                                            <th>Cor</th>
+                                            <th>Largura</th>
+                                            <th>Comprimento</th>
+                                            <th>Área</th>
+                                            <th>Cliente</th>
+                                            <th>Data Venda</th>
+                                            <td align="center" > <strong> Valor R$ </strong> </td>
+<!--                                        <th>Informações</th> Coluna de informaçoes -->
+                                        </thead>
+
+                                        <tbody>
+                                            {% for v in vendas %}
+                                                <tr>
+                                                    <td>{{ v.sequencia }}</td>
+                                                    <td style="color:{{ v.cor_estilo }};" >{{ v.quadra }}</td>
+                                                    <td style="color:{{ v.cor_estilo }};">{{ v.numero_lote }}</td>
+                                                    <td style="color:{{ v.cor_estilo }};">{{ v.cor|default:"---" }}</td>
+                                                    <td>{{ v.largura }}</td>
+                                                    <td>{{ v.comprimento }}</td>
+                                                    <td>{{ v.area }}</td>
+                                                    <td>{{ v.nome_cli }}</td>
+                                                    <td>{{ v.dt_venda }}</td>
+                                                    <td align="center" >{{ v.valor_form }}</td>
+<!--                                                    <td>
+                                                        <a href="#">
+                                                            Ver
+                                                        </a>
+                                                    </td> Coluna de informaçoes -->
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <nav aria-label="Page navigation example">
+                          <ul class="pagination">
+                            {% for pagina in vendas.paginator.page_range %}
+
+                              {% if vendas.number == pagina %}
+                                <li class="page-item active">
+                                  <a class="page-link" href="?p={{ pagina }}&termo={{ request.GET.termo }}">{{pagina}}</a>
+                                </li>
+                              {% else %}
+                                <li class="page-item">
+                                  <a class="page-link" href="?p={{ pagina }}&termo={{ request.GET.termo }}">{{pagina}}</a>
+                                </li>
+                              {% endif  %}
+
+                            {% endfor %}
+                          </ul>
+                        </nav>
+
+
+                    </div>
+
+
+
+
+
+{% endblock conteudo %}
