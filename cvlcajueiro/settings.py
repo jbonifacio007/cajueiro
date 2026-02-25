@@ -93,7 +93,7 @@ DATABASES = {
     }
 }
 """
-
+""" DESENV
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -103,6 +103,18 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+"""
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dbcajueiro',
+        'USER': 'boni',
+        'PASSWORD': 'pi110897',
+        'PORT': '5432',
+    }
+}
+
 
 """
 #PRODUCAO
