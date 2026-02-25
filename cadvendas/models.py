@@ -291,7 +291,8 @@ class Cliente(Base):
         ordering = ['nome']
 
     def __str__(self):
-        return self.nome
+#        return self.nome
+        return  f'{self.nome} - {self.cpf}' 
 
 
 class Corretor(Base):
